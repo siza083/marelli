@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+body { margin: 0; font-family: 'Poppins', sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: #C41230; text-decoration: none; }
+a:hover { color: #8f0d21; }
+* { box-sizing: border-box; }
+::-webkit-scrollbar { height: 8px; }
+::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 4px; }
+image-slot#cat-0::part(frame), image-slot#cat-1::part(frame),
+image-slot#cat-2::part(frame), image-slot#cat-4::part(frame) { background: #FFFFFF; }
+</style>
+</helmet>
+
+<div style="width:100%;min-height:100vh;background:#FFFFFF;color:#3A3A3A;overflow-x:hidden">
+
+<!-- UTILITY BAR -->
+
+<!-- HEADER -->
+<header style="position:sticky;top:0;z-index:50;background:#FFFFFF;border-bottom:1px solid #EFEFEF;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px)">
+<div style="font-size:20px;font-weight:700;letter-spacing:0.5px;color:#3A3A3A">Marelli <span style="color:#C41230">JP</span></div>
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ toggleMobileMenu }}" aria-label="Menu" style="background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px">
+<span style="width:26px;height:2px;background:#3A3A3A;display:block"></span>
+<span style="width:26px;height:2px;background:#3A3A3A;display:block"></span>
+<span style="width:26px;height:2px;background:#3A3A3A;display:block"></span>
+</button>
+<sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+<nav style="position:absolute;top:64px;left:0;right:0;background:#FFFFFF;border-bottom:1px solid #E5E5E5;display:flex;flex-direction:column;padding:12px clamp(20px,5vw,64px) 24px;gap:18px;box-shadow:0 12px 24px rgba(0,0,0,0.06)">
+<a href="#hero" onClick="{{ closeMobileMenu }}" style="color:#3A3A3A;font-weight:500;font-size:15px">Início</a>
+<a href="#diferenciais" onClick="{{ closeMobileMenu }}" style="color:#3A3A3A;font-weight:500;font-size:15px">Diferenciais</a>
+<a href="#cases" onClick="{{ closeMobileMenu }}" style="color:#3A3A3A;font-weight:500;font-size:15px">Cases</a>
+<a href="#catalogo" onClick="{{ closeMobileMenu }}" style="color:#3A3A3A;font-weight:500;font-size:15px">Catálogo</a>
+<a href="#bibliotecas" onClick="{{ closeMobileMenu }}" style="color:#3A3A3A;font-weight:500;font-size:15px">Bibliotecas</a>
+<a href="#contato" onClick="{{ closeMobileMenu }}" style="color:#C41230;font-weight:600;font-size:15px">Contato</a>
+</nav>
+</sc-if>
+</sc-if>
+<sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+<nav style="display:flex;align-items:center;gap:clamp(16px,2.5vw,36px)">
+<a href="#hero" style="color:#3A3A3A;font-weight:500;font-size:14px;letter-spacing:0.3px">Início</a>
+<a href="#diferenciais" style="color:#3A3A3A;font-weight:500;font-size:14px;letter-spacing:0.3px">Diferenciais</a>
+<a href="#cases" style="color:#3A3A3A;font-weight:500;font-size:14px;letter-spacing:0.3px">Cases</a>
+<a href="#catalogo" style="color:#3A3A3A;font-weight:500;font-size:14px;letter-spacing:0.3px">Catálogo</a>
+<a href="#bibliotecas" style="color:#3A3A3A;font-weight:500;font-size:14px;letter-spacing:0.3px">Bibliotecas</a>
+<a href="#contato" style="background:#C41230;color:#FFFFFF;padding:11px 24px;border-radius:999px;font-weight:600;font-size:13px;letter-spacing:0.3px">Contato</a>
+</nav>
+</sc-if>
+</header>
+
+<!-- HERO -->
+<section id="hero" data-screen-label="Hero" style="padding:clamp(48px,7vw,80px) clamp(20px,6vw,64px);display:flex;flex-wrap:wrap;gap:48px;align-items:center;background:#FAFAFA">
+<div style="flex:1 1 420px;display:flex;flex-direction:column;align-items:flex-start;gap:22px">
+
+<h1 style="font-size:clamp(32px,4.4vw,50px);line-height:1.14;font-weight:700;color:#3A3A3A;margin:0;text-wrap:pretty">Mobiliário Corporativo<br><span style="color:#C41230">Feito Para Durar</span></h1>
+<p style="font-size:clamp(15px,1.3vw,17px);line-height:1.65;color:#5A5A5A;max-width:500px;margin:0">Durabilidade, atemporalidade e ergonomia juntas, sem abrir mão da beleza. Projetos completos para empresas e órgãos públicos.</p>
+<div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:6px">
+<a href="{{ ctaWaLink }}" target="_blank" rel="noopener" style="background:#C41230;color:#FFFFFF;padding:15px 30px;border-radius:999px;font-weight:600;font-size:14.5px">Fale com o time de projetos</a>
+<a href="#catalogo" style="border:1px solid #3A3A3A;color:#3A3A3A;padding:15px 28px;border-radius:999px;font-weight:600;font-size:14.5px">Ver catálogo</a>
+</div>
+</div>
+<div style="position:relative;flex:1 1 380px;width:100%;height:clamp(280px,38vw,440px)">
+<div style="width:100%;height:100%;-webkit-mask-image:radial-gradient(ellipse 78% 78% at 50% 50%,#000 45%,transparent 100%);mask-image:radial-gradient(ellipse 78% 78% at 50% 50%,#000 45%,transparent 100%)">
+<image-slot id="hero-bg" shape="rounded" radius="40" placeholder="Foto: ambiente corporativo Marelli" src="img/capa%20hero.png" style="width:100%;height:100%"></image-slot>
+</div>
+<div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 78% 78% at 50% 50%,transparent 35%,rgba(250,250,250,0.5) 65%,#FAFAFA 100%)"></div>
+</div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais" data-screen-label="Diferenciais" style="padding:clamp(48px,7vw,88px) clamp(20px,6vw,64px);background:#FFFFFF">
+<div style="text-align: center; max-width: 640px; margin: 0 auto 44px">
+<div style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C41230;margin-bottom:10px">Por que investir</div><h2 style="font-size: clamp(24px,3vw,34px); font-weight: 700; color: #3A3A3A; margin: 0; text-wrap: pretty">Por que investir em<br>mobiliário Marelli</h2>
+
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px">
+<sc-for list="{{ diferenciais }}" as="item" hint-placeholder-count="5">
+<div style="background:#FAFAFA;border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;gap:14px">
+<div style="width:40px;height:40px;border-radius:50%;background:#C41230;color:#FFFFFF;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ item.iconKind === 'clock' }}" hint-placeholder-val="{{ false }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+</sc-if>
+<sc-if value="{{ item.iconKind === 'shield' }}" hint-placeholder-val="{{ false }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>
+</sc-if>
+<sc-if value="{{ item.iconKind === 'circle' }}" hint-placeholder-val="{{ false }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18"/></svg>
+</sc-if>
+<sc-if value="{{ item.iconKind === 'person' }}" hint-placeholder-val="{{ false }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><path d="M6 21l2-8 3 2 1-5 1 5 3-2 2 8"/></svg>
+</sc-if>
+<sc-if value="{{ item.iconKind === 'grid' }}" hint-placeholder-val="{{ false }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+</sc-if>
+</div>
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+<div style="font-size:16.5px;font-weight:600;color:#3A3A3A">{{ item.title }}</div>
+<sc-if value="{{ item.tag }}" hint-placeholder-val="{{ false }}">
+<span style="font-size:10px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:#C41230;border:1px solid #C41230;border-radius:999px;padding:3px 9px">{{ item.tag }}</span>
+</sc-if>
+</div>
+<div style="font-size:14.5px;line-height:1.6;color:#5A5A5A">{{ item.desc }}</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- CATALOGO -->
+<section id="catalogo" data-screen-label="Catálogo" style="padding:clamp(48px,7vw,88px) 0;background:#FFFFFF">
+<div style="padding:0 clamp(20px,6vw,64px)">
+<div style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C41230;margin-bottom:10px">Catálogo</div>
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:32px">
+<h2 style="font-size:clamp(24px,3vw,34px);font-weight:700;color:#3A3A3A;margin:0;text-wrap:pretty">Navegue por nossas soluções</h2>
+<div style="display:flex;gap:10px">
+<button onClick="{{ scrollCatalog(-1) }}" aria-label="Anterior" style="width:44px;height:44px;border-radius:50%;border:1px solid #E5E5E5;background:#FAFAFA;color:#3A3A3A;cursor:pointer;font-size:16px">←</button>
+<button onClick="{{ scrollCatalog(1) }}" aria-label="Próximo" style="width:44px;height:44px;border-radius:50%;border:1px solid #E5E5E5;background:#FAFAFA;color:#3A3A3A;cursor:pointer;font-size:16px">→</button>
+</div>
+</div>
+</div>
+<div ref="{{ catalogRef }}" style="display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px clamp(20px,6vw,64px) 12px">
+<div style="flex:0 0 clamp(20px,6vw,64px);scroll-snap-align:start"></div>
+<sc-for list="{{ categories }}" as="cat" hint-placeholder-count="6">
+<div style="flex:0 0 clamp(220px,26vw,270px);scroll-snap-align:start;background:#FAFAFA;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 24px rgba(0,0,0,0.05)">
+<div style="width:100%;height:200px;background:{{ cat.imgBg }};padding:{{ cat.imgPad }};box-sizing:border-box">
+<image-slot id="{{ cat.slotId }}" shape="rect" fit="{{ cat.fit }}" style="width:100%;height:100%" placeholder="{{ cat.imgPlaceholder }}" src="{{ cat.imgSrc }}"></image-slot>
+</div>
+<div style="padding:20px;display:flex;flex-direction:column;gap:14px;flex:1">
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#8C8C8C">Categoria</div>
+<sc-if value="{{ cat.isConsult }}" hint-placeholder-val="{{ false }}">
+<span style="font-size:9.5px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:#C41230;border:1px solid #C41230;border-radius:999px;padding:2px 8px">Sob Consulta</span>
+</sc-if>
+</div>
+<div style="font-size:17px;font-weight:700;color:#3A3A3A;flex:1">{{ cat.name }}</div>
+<a href="{{ cat.waLink }}" target="_blank" rel="noopener" style="border:1.5px solid #C41230;color:#C41230;text-align:center;padding:11px 14px;border-radius:999px;font-weight:600;font-size:12.5px;letter-spacing:0.3px">Falar sobre {{ cat.name }}</a>
+</div>
+</div>
+</sc-for>
+<div style="flex:0 0 clamp(20px,6vw,64px)"></div>
+</div>
+</section>
+
+<!-- CASES -->
+<section id="cases" data-screen-label="Cases" style="padding:clamp(48px,7vw,88px) clamp(20px,6vw,64px);background:#FAFAFA">
+<div style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C41230;margin-bottom:10px">Cases</div>
+<h2 style="font-size:clamp(24px,3vw,34px);font-weight:700;color:#3A3A3A;margin:0 0 12px;max-width:760px;text-wrap:pretty">A Força da Marca</h2>
+<p style="font-size:15px;line-height:1.6;color:#5A5A5A;max-width:760px;margin:0 0 36px">Ao contratar a Marelli você tem acesso ao mesmo padrão de produto e marca por trás de projetos como:</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+<sc-for list="{{ cases }}" as="c" hint-placeholder-count="4">
+<div style="background:#FAFAFA;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px">
+<sc-for list="{{ c.photos }}" as="ph" hint-placeholder-count="3">
+<image-slot id="{{ ph.slotId }}" onClick="{{ ph.open }}" shape="rounded" radius="14" placeholder="{{ ph.placeholder }}" src="{{ ph.src }}" style="flex:0 0 78%;scroll-snap-align:start;height:160px;cursor:pointer"></image-slot>
+</sc-for>
+</div>
+<div style="padding:16px 20px 16px;display:flex;flex-direction:column;gap:6px">
+<div style="font-size:12.5px;line-height:1.55;color:#4A4A4A" dangerouslySetInnerHTML="{{ c.descHtml }}"></div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;padding:14px 20px;border-top:1px solid #EDEDED">
+<image-slot id="{{ c.logoSlotId }}" shape="rect" fit="contain" style="width:42px;height:42px;flex-shrink:0" placeholder="Logo" src="{{ c.logoSrc }}"></image-slot>
+<div style="display:flex;flex-direction:column;gap:1px">
+<div style="font-size:13px;font-weight:700;color:#3A3A3A">{{ c.name }}</div>
+<sc-if value="{{ c.by }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:11.5px;color:#9A9A9A">{{ c.by }}</div>
+</sc-if>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" data-screen-label="FAQ" style="padding:clamp(48px,7vw,88px) clamp(20px,6vw,64px);max-width:860px;margin:0 auto;background:#FFFFFF">
+<div style="text-align:center;margin-bottom:32px">
+<div style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C41230;margin-bottom:10px">FAQ</div>
+<h2 style="font-size:clamp(24px,3vw,34px);font-weight:700;color:#3A3A3A;margin:0">Perguntas frequentes</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ faqs }}" as="f" hint-placeholder-count="4">
+<div style="background:#FAFAFA;border-radius:16px;overflow:hidden">
+<button onClick="{{ f.toggle }}" style="width:100%;text-align:left;background:transparent;border:none;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer">
+<span style="font-size:15.5px;font-weight:600;color:#3A3A3A">{{ f.q }}</span>
+<span style="font-size:20px;color:#C41230;flex-shrink:0">{{ f.symbol }}</span>
+</button>
+<sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 22px 20px;font-size:14.5px;line-height:1.6;color:#5A5A5A">
+<sc-if value="{{ f.isPending }}" hint-placeholder-val="{{ false }}">
+<span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:#C41230;border:1px solid #C41230;border-radius:999px;padding:3px 9px;margin-bottom:8px">A definir</span><br>
+</sc-if>
+{{ f.a }}
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- BIBLIOTECAS -->
+<section id="bibliotecas" data-screen-label="Bibliotecas técnicas" style="padding:clamp(48px,7vw,88px) clamp(20px,6vw,64px);background:#FAFAFA">
+<div style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C41230;margin-bottom:10px">Bibliotecas técnicas</div>
+<h2 style="font-size:clamp(24px,3vw,34px);font-weight:700;color:#3A3A3A;margin:0 0 10px;text-wrap:pretty">Modelos, Coleções e Produtos Marelli</h2>
+<p style="font-size:15px;line-height:1.6;color:#5A5A5A;max-width:640px;margin:0 0 36px">Prontas para uso em projeto.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;max-width:920px">
+<sc-for list="{{ libraries }}" as="lib" hint-placeholder-count="3">
+<div style="background:#FFFFFF;border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:16px;box-shadow:0 8px 24px rgba(0,0,0,0.05)">
+<div style="font-size:17px;font-weight:700;color:#3A3A3A">{{ lib.title }}</div>
+<div style="font-size:13.5px;color:#8C8C8C;flex:1">{{ lib.desc }}</div>
+<button onClick="{{ lib.open }}" style="border:none;color:#FFFFFF;background:#C41230;padding:12px 16px;border-radius:999px;font-weight:600;font-size:13px;cursor:pointer">{{ lib.ctaLabel }}</button>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- CTA FINAL + CONTATO -->
+<section id="contato" data-screen-label="Contato" style="padding:clamp(48px,7vw,88px) clamp(20px,6vw,64px);background:#FFFFFF">
+<div style="background:#232323;border-radius:28px;padding:clamp(36px,5vw,60px);display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:center;color:#FFFFFF">
+<div style="max-width:520px;display:flex;flex-direction:column;gap:14px">
+<h2 style="font-size:clamp(22px,2.8vw,32px);font-weight:700;margin:0;text-wrap:pretty">Seu próximo ambiente de trabalho pode durar mais que o próximo modismo.</h2>
+<p style="font-size:14.5px;line-height:1.65;color:#C9C9C9;margin:0">37 anos de experiência, mobiliário que não perde valor com o tempo e projetos que já atenderam desde cooperativas de crédito até grandes grupos de mídia.</p>
+<a href="{{ ctaWaLink }}" target="_blank" rel="noopener" style="margin-top:6px;width:fit-content;background:#C41230;color:#FFFFFF;padding:15px 30px;border-radius:999px;font-weight:600;font-size:14px">Fale com o time de projetos</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:14px;color:#D8D8D8;line-height:1.6;min-width:240px">
+<div style="font-size:15px;font-weight:700;color:#FFFFFF;margin-bottom:4px">Marelli JP</div>
+<div>Moriah Shopping, Av. Pres. Epitácio Pessoa, 2580, Loja 01, Tambauzinho, João Pessoa, PB, 58042-006</div>
+<div><a href="mailto:gerencia@marellipb.com.br" style="color:#D8D8D8">gerencia@marellipb.com.br</a></div>
+<div><a href="{{ ctaWaLink }}" target="_blank" rel="noopener" style="color:#D8D8D8">(83) 98197-0770</a></div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:24px clamp(20px,6vw,64px);text-align:center;font-size:12.5px;color:#8C8C8C">
+© 2026 Marelli João Pessoa. Todos os direitos reservados.
+</footer>
+
+<!-- LIGHTBOX: FOTOS DOS CASES -->
+<sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeLightbox }}" style="position:fixed;inset:0;background:rgba(20,20,20,0.9);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px">
+<button onClick="{{ closeLightbox }}" aria-label="Fechar" style="position:absolute;top:18px;right:20px;background:rgba(255,255,255,0.14);border:none;color:#FFFFFF;font-size:22px;width:42px;height:42px;border-radius:50%;cursor:pointer;line-height:1">×</button>
+<sc-if value="{{ lightboxHasMultiple }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ lightboxPrevClick }}" aria-label="Foto anterior" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.14);border:none;color:#FFFFFF;font-size:26px;width:46px;height:46px;border-radius:50%;cursor:pointer;line-height:1">‹</button>
+<button onClick="{{ lightboxNextClick }}" aria-label="Próxima foto" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.14);border:none;color:#FFFFFF;font-size:26px;width:46px;height:46px;border-radius:50%;cursor:pointer;line-height:1">›</button>
+</sc-if>
+<div onClick="{{ stopPropagation }}" style="max-width:min(92vw,1100px);max-height:88vh;display:flex;flex-direction:column;align-items:center;gap:12px">
+<img src="{{ lightboxSrc }}" alt="" style="max-width:100%;max-height:80vh;border-radius:14px;object-fit:contain;box-shadow:0 24px 64px rgba(0,0,0,0.5)">
+<sc-if value="{{ lightboxHasMultiple }}" hint-placeholder-val="{{ false }}">
+<div style="color:#FFFFFF;font-size:13px;opacity:0.75">{{ lightboxCounter }}</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+<!-- MODAL: CAPTURA DE LEAD -->
+<sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeModal }}" style="position:fixed;inset:0;background:rgba(58,58,58,0.55);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px">
+<div onClick="{{ stopPropagation }}" style="background:#FFFFFF;border-radius:24px;padding:34px;max-width:440px;width:100%;display:flex;flex-direction:column;gap:16px;max-height:90vh;overflow-y:auto">
+<sc-if value="{{ formSubmitted }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:19px;font-weight:700;color:#3A3A3A">Tudo certo!</div>
+<div style="font-size:14.5px;color:#3A3A3A;line-height:1.6">{{ modalSuccessMsg }}</div>
+<button onClick="{{ closeModal }}" style="margin-top:8px;background:#C41230;color:#FFFFFF;border:none;padding:13px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer">Fechar</button>
+</sc-if>
+<sc-if value="{{ formNotSubmitted }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+<div style="font-size:19px;font-weight:700;color:#3A3A3A;line-height:1.3">Baixe os arquivos técnicos da Marelli</div>
+<button onClick="{{ closeModal }}" aria-label="Fechar" style="background:none;border:none;font-size:20px;color:#8C8C8C;cursor:pointer;line-height:1">×</button>
+</div>
+<div style="font-size:13.5px;color:#8C8C8C">Preencha seus dados e a ação começa automaticamente.</div>
+<input placeholder="Nome" value="{{ formName }}" onChange="{{ onFormChange('name') }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
+<input placeholder="E-mail" value="{{ formEmail }}" onChange="{{ onFormChange('email') }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
+<input placeholder="WhatsApp" value="{{ formPhone }}" onChange="{{ onFormChange('phone') }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
+<input placeholder="Escritório ou empresa (opcional)" value="{{ formCompany }}" onChange="{{ onFormChange('company') }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
+<label style="display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:#3A3A3A;line-height:1.5">
+<input type="checkbox" checked="{{ formAccepted }}" onChange="{{ onFormToggleAccept }}" style="margin-top:2px">
+Li e aceito a política de privacidade.
+</label>
+<button onClick="{{ submitForm }}" disabled="{{ submitDisabled }}" style="background:{{ submitBg }};color:#FFFFFF;border:none;padding:14px;border-radius:999px;font-weight:600;font-size:14px;cursor:{{ submitCursor }}">{{ modalCtaLabel }}</button>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+state = {
+isMobile: false,
+mobileMenuOpen: false,
+catalogRef: null,
+faqOpen: {},
+modalOpen: false,
+modalType: null,
+formName: '', formEmail: '', formPhone: '', formCompany: '', formAccepted: false,
+formSubmitted: false,
+lightboxOpen: false, lightboxPhotos: [], lightboxIndex: 0,
+};
+
+componentDidMount() {
+this.updateIsMobile();
+this._onResize = () => this.updateIsMobile();
+window.addEventListener('resize', this._onResize);
+this._onKeydown = (e) => {
+if (!this.state.lightboxOpen) return;
+if (e.key === 'Escape') this.closeLightbox();
+else if (e.key === 'ArrowLeft') this.lightboxPrev();
+else if (e.key === 'ArrowRight') this.lightboxNext();
+};
+window.addEventListener('keydown', this._onKeydown);
+}
+componentWillUnmount() {
+window.removeEventListener('resize', this._onResize);
+window.removeEventListener('keydown', this._onKeydown);
+}
+updateIsMobile() { this.setState({ isMobile: window.innerWidth <= 860 }); }
+
+waLink(msg) { return 'https://wa.me/5583982045674?text=' + encodeURIComponent(msg); }
+
+toggleMobileMenu = () => this.setState(s => ({ mobileMenuOpen: !s.mobileMenuOpen }));
+closeMobileMenu = () => this.setState({ mobileMenuOpen: false });
+
+scrollCatalog(dir) {
+return () => {
+const el = this.state.catalogRef;
+if (el) el.scrollBy({ left: dir * 300, behavior: 'smooth' });
+};
+}
+
+toggleFaq(i) {
+return () => this.setState(s => ({ faqOpen: { ...s.faqOpen, [i]: !s.faqOpen[i] } }));
+}
+
+openModal(type) {
+return () => this.setState({ modalOpen: true, modalType: type, formSubmitted: false, formName: '', formEmail: '', formPhone: '', formCompany: '', formAccepted: false });
+}
+closeModal = () => this.setState({ modalOpen: false });
+stopPropagation = (e) => e.stopPropagation();
+
+openLightbox(photos, index) {
+return () => this.setState({ lightboxOpen: true, lightboxPhotos: photos, lightboxIndex: index });
+}
+closeLightbox = () => this.setState({ lightboxOpen: false });
+lightboxPrev = () => this.setState((s) => ({ lightboxIndex: (s.lightboxIndex - 1 + s.lightboxPhotos.length) % (s.lightboxPhotos.length || 1) }));
+lightboxNext = () => this.setState((s) => ({ lightboxIndex: (s.lightboxIndex + 1) % (s.lightboxPhotos.length || 1) }));
+lightboxPrevClick = (e) => { e.stopPropagation(); this.lightboxPrev(); };
+lightboxNextClick = (e) => { e.stopPropagation(); this.lightboxNext(); };
+
+onFormChange(field) {
+var key = 'form' + field.charAt(0).toUpperCase() + field.slice(1);
+return (e) => this.setState({ [key]: e.target.value });
+}
+onFormToggleAccept = () => this.setState(s => ({ formAccepted: !s.formAccepted }));
+
+submitForm = () => {
+const { formName, formEmail, formPhone, formAccepted, modalType } = this.state;
+if (!formName || !formEmail || !formPhone || !formAccepted) return;
+this.setState({ formSubmitted: true });
+if (modalType === '3d') {
+window.open('https://3dwarehouse.sketchup.com/', '_blank');
+} else {
+const fileName = modalType === 'revit' ? 'marelli-revit-bim-placeholder.txt' : 'marelli-biblioteca-2d-placeholder.txt';
+const blob = new Blob(['Arquivo técnico Marelli — placeholder de demonstração.'], { type: 'text/plain' });
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url; a.download = fileName; document.body.appendChild(a); a.click();
+a.remove(); URL.revokeObjectURL(url);
+}
+};
+
+renderVals() {
+const waLink = (msg) => this.waLink(msg);
+const ctaWaLink = waLink('Olá, vim do site e quero falar com o time de projetos.');
+
+const diferenciais = [
+{ title: '37 anos de mercado.', desc: 'Histórico real em projetos de grande porte, do setor privado a órgãos públicos.', iconKind: 'clock' },
+{ title: 'Durabilidade comprovada.', desc: 'Menos troca, menos custo ao longo do tempo.', iconKind: 'shield' },
+{ title: 'Design atemporal.', desc: 'Ambiente que não pede reforma por moda passageira.', iconKind: 'circle' },
+{ title: 'Ergonomia avançada.', desc: 'Mais conforto, menos afastamento na equipe.', iconKind: 'person' },
+{ title: 'Projeto integrado.', desc: 'Cadeiras, divisórias e mobiliário pensados como um ambiente só, não itens soltos.', iconKind: 'grid' },
+];
+
+const html = (s) => ({ __html: s });
+const photosFor = (key, label) => [1, 2, 3].map((n) => ({ slotId: key + '-ph-' + n, placeholder: 'Foto ' + n + ': ' + label }));
+const photosForFiles = (key, label, count) => Array.from({ length: count }, (_, i) => {
+const n = i + 1;
+return { slotId: key + '-ph-' + n, placeholder: 'Foto ' + n + ': ' + label, src: 'img/cases/' + key + '-' + n + '.jpg' };
+});
+const cases = [
+{
+photos: photosForFiles('arsystem', 'Arsystem', 7), logoSlotId: 'logo-arsystem', logoSrc: 'img/arsystem.jpg',
+name: 'Arsystem', by: '', isPlaceholder: false,
+descHtml: html('<p style="margin:0">Descrição do case em breve.</p>'),
+},
+{
+photos: photosForFiles('avell', 'Avell', 6), logoSlotId: 'logo-avell', logoSrc: 'img/avell.png',
+name: 'Avell', by: '', isPlaceholder: false,
+descHtml: html('<p style="margin:0">Descrição do case em breve.</p>'),
+},
+{
+photos: photosForFiles('biosaude', 'BioSaúde', 5), logoSlotId: 'logo-biosaude', logoSrc: 'img/biosaude.webp',
+name: 'BioSaúde', by: '', isPlaceholder: false,
+descHtml: html('<p style="margin:0">Descrição do case em breve.</p>'),
+},
+{
+photos: photosForFiles('bnengenharia', 'BN Engenharia', 8), logoSlotId: 'logo-bnengenharia', logoSrc: 'img/' + encodeURIComponent('bn engenharia.png'),
+name: 'BN Engenharia', by: '', isPlaceholder: false,
+descHtml: html('<p style="margin:0">Descrição do case em breve.</p>'),
+},
+{
+photos: photosForFiles('softcom', 'Softcom', 7), logoSlotId: 'logo-softcom', logoSrc: 'img/softcom.jpg',
+name: 'Softcom', by: '', isPlaceholder: false,
+descHtml: html('<p style="margin:0">Case regional da franquia Marelli João Pessoa. Descrição em breve.</p>'),
+},
+].map((c) => ({
+...c,
+photos: c.photos.map((ph, i) => ({ ...ph, open: this.openLightbox(c.photos, i) })),
+}));
+
+const categoryImageFiles = {
+'Assentos': 'assentos.webp',
+'Mobiliários': 'mobiliario.png',
+'Estofados': 'estofados.png',
+'Divisórias': 'divisorias.png',
+'Cabines Acústicas': 'cabines acusticas.webp',
+'Acessórios': 'acessorios.webp',
+'Arquivos deslizantes': 'arquivos deslizantes.jpeg',
+'Outsourcing de impressão': 'outsourcing de impressão.webp',
+};
+const imgSrcFor = function (name) {
+const file = categoryImageFiles[name];
+return file ? 'img/' + encodeURIComponent(file) : undefined;
+};
+const categoryNames = ['Assentos', 'Mobiliários', 'Estofados', 'Divisórias', 'Cabines Acústicas', 'Acessórios'];
+const productFramed = ['Assentos', 'Mobiliários', 'Estofados', 'Cabines Acústicas'];
+const recroppedCover = ['Mobiliários', 'Cabines Acústicas'];
+const categories = categoryNames.map(function (name, i) {
+const isFramed = productFramed.indexOf(name) !== -1;
+return {
+name: name, slotId: 'cat-' + i, imgPlaceholder: 'Foto: ' + name, imgSrc: imgSrcFor(name),
+fit: recroppedCover.indexOf(name) !== -1 ? 'cover' : (isFramed ? 'contain' : 'cover'),
+imgBg: isFramed ? '#FFFFFF' : 'transparent', imgPad: '0',
+waLink: waLink('Olá, vim do site e tenho interesse na categoria ' + name + '.'),
+};
+});
+const consultServices = ['Arquivos deslizantes', 'Outsourcing de impressão'];
+consultServices.forEach(function (name, i) {
+categories.push({
+name: name, slotId: 'consult-' + i, imgPlaceholder: 'Foto: ' + name, imgSrc: imgSrcFor(name), isConsult: true,
+waLink: waLink('Olá, vim do site e tenho interesse no serviço ' + name + '.'),
+});
+});
+
+const faqData = [
+{ q: 'Vocês atendem processos de licitação pública?', a: 'Sim, temos experiência ampla com órgãos públicos e participação em licitações com total transparência documental.' },
+{ q: 'É possível comprar apenas alguns itens, sem fechar um projeto completo?', a: 'Sim, os catálogos estão disponíveis para compra avulsa, mas também estruturamos projetos completos quando o ambiente pede uma solução integrada.' },
+{ q: 'Qual o prazo médio de entrega para um projeto corporativo?', a: 'Prazo a definir com o cliente.', isPending: true },
+{ q: 'Vocês atendem fora de João Pessoa?', a: 'Nosso atendimento direto cobre João Pessoa, Cabedelo e Santa Rita. Somos a franquia oficial Marelli nessa região, com acesso ao portfólio completo e ao suporte técnico da marca nacional.' },
+];
+const faqs = faqData.map((f, i) => ({ ...f, open: !!this.state.faqOpen[i], symbol: this.state.faqOpen[i] ? '−' : '+', toggle: this.toggleFaq(i) }));
+
+const libraries = [
+{ title: 'Biblioteca 2D', desc: 'Modelos em 2D prontos para uso em projeto.', ctaLabel: 'Baixar agora', open: this.openModal('2d') },
+{ title: '3D Warehouse', desc: 'Coleções Marelli na plataforma 3D Warehouse.', ctaLabel: 'Acessar agora', open: this.openModal('3d') },
+{ title: 'Revit B.I.M.', desc: 'Famílias Revit prontas para especificação.', ctaLabel: 'Baixar agora', open: this.openModal('revit') },
+];
+
+const modalTitles = { '2d': 'Baixar agora', '3d': 'Acessar agora', 'revit': 'Baixar agora' };
+const modalCtaLabel = modalTitles[this.state.modalType] || 'Enviar';
+const modalSuccessMsg = this.state.modalType === '3d'
+? 'Abrimos o 3D Warehouse em uma nova aba.'
+: 'O download do arquivo começou automaticamente.';
+
+const canSubmit = this.state.formName && this.state.formEmail && this.state.formPhone && this.state.formAccepted;
+
+const lightboxPhoto = this.state.lightboxPhotos[this.state.lightboxIndex] || null;
+const lightboxSrc = lightboxPhoto ? lightboxPhoto.src : '';
+const lightboxHasMultiple = this.state.lightboxPhotos.length > 1;
+const lightboxCounter = this.state.lightboxPhotos.length ? (this.state.lightboxIndex + 1) + ' / ' + this.state.lightboxPhotos.length : '';
+
+return {
+isMobile: this.state.isMobile, notMobile: !this.state.isMobile,
+mobileMenuOpen: this.state.mobileMenuOpen,
+toggleMobileMenu: this.toggleMobileMenu, closeMobileMenu: this.closeMobileMenu,
+ctaWaLink,
+diferenciais, cases, categories, faqs, libraries,
+catalogRef: (el) => { this.state.catalogRef = el; },
+scrollCatalog: (dir) => this.scrollCatalog(dir),
+modalOpen: this.state.modalOpen,
+formSubmitted: this.state.formSubmitted, formNotSubmitted: !this.state.formSubmitted,
+modalCtaLabel, modalSuccessMsg,
+closeModal: this.closeModal, stopPropagation: this.stopPropagation,
+formName: this.state.formName, formEmail: this.state.formEmail, formPhone: this.state.formPhone, formCompany: this.state.formCompany,
+onFormChange: (f) => this.onFormChange(f),
+formAccepted: this.state.formAccepted, onFormToggleAccept: this.onFormToggleAccept,
+submitForm: this.submitForm,
+submitDisabled: !canSubmit,
+submitBg: canSubmit ? '#C41230' : '#D8A8AF',
+submitCursor: canSubmit ? 'pointer' : 'not-allowed',
+lightboxOpen: this.state.lightboxOpen, lightboxSrc, lightboxCounter, lightboxHasMultiple,
+closeLightbox: this.closeLightbox, lightboxPrevClick: this.lightboxPrevClick, lightboxNextClick: this.lightboxNextClick,
+};
+}
+}
+</script>
+</body>
+</html>
