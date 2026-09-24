@@ -22,6 +22,9 @@ a:hover { color: #8f0d21; }
 ::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 4px; }
 image-slot#cat-0::part(frame), image-slot#cat-1::part(frame),
 image-slot#cat-2::part(frame), image-slot#cat-4::part(frame) { background: #FFFFFF; }
+@media (min-width: 861px) {
+.hero-title-line1 { white-space: nowrap; }
+}
 </style>
 </helmet>
 
@@ -67,7 +70,7 @@ image-slot#cat-2::part(frame), image-slot#cat-4::part(frame) { background: #FFFF
 <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(90deg, rgba(15,15,15,0.78) 0%, rgba(15,15,15,0.55) 45%, rgba(15,15,15,0.15) 100%)"></div>
 <div style="position:relative;z-index:2;max-width:520px;display:flex;flex-direction:column;align-items:flex-start;gap:20px">
 
-<h1 style="font-size:clamp(28px,4.4vw,50px);line-height:1.14;font-weight:700;color:#FFFFFF;margin:0;text-wrap:pretty">Mobiliário Corporativo<br><span style="color:#FF5C72">Feito Para Durar</span></h1>
+<h1 style="font-size:clamp(28px,4.4vw,50px);line-height:1.14;font-weight:700;color:#FFFFFF;margin:0;text-wrap:pretty"><span class="hero-title-line1">Mobiliário Corporativo</span><br><span style="color:#FF5C72">Feito Para Durar</span></h1>
 <p style="font-size:clamp(14.5px,1.3vw,17px);line-height:1.65;color:#EDEDED;max-width:460px;margin:0">Durabilidade, atemporalidade e ergonomia juntas, sem abrir mão da beleza. Projetos completos para empresas e órgãos públicos.</p>
 <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:6px">
 <a href="{{ ctaWaLink }}" target="_blank" rel="noopener" style="background:#C41230;color:#FFFFFF;padding:15px 30px;border-radius:999px;font-weight:600;font-size:14.5px">Fale com o time de projetos</a>
