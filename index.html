@@ -162,9 +162,11 @@ image-slot#cat-2::part(frame), image-slot#cat-4::part(frame) { background: #FFFF
 <image-slot id="{{ ph.slotId }}" onClick="{{ ph.open }}" shape="rounded" radius="14" placeholder="{{ ph.placeholder }}" src="{{ ph.src }}" style="flex:0 0 78%;scroll-snap-align:start;height:160px;cursor:pointer"></image-slot>
 </sc-for>
 </div>
+<sc-if value="{{ c.descHtml }}" hint-placeholder-val="{{ false }}">
 <div style="padding:16px 20px 16px;display:flex;flex-direction:column;gap:6px">
 <div style="font-size:12.5px;line-height:1.55;color:#4A4A4A" dangerouslySetInnerHTML="{{ c.descHtml }}"></div>
 </div>
+</sc-if>
 <div style="display:flex;align-items:center;gap:10px;padding:14px 20px;border-top:1px solid #EDEDED">
 <image-slot id="{{ c.logoSlotId }}" shape="rect" fit="contain" style="width:42px;height:42px;flex-shrink:0" placeholder="Logo" src="{{ c.logoSrc }}"></image-slot>
 <div style="display:flex;flex-direction:column;gap:1px">
@@ -398,27 +400,27 @@ const cases = [
 {
 photos: photosForFiles('arsystem', 'Arsystem', 7), logoSlotId: 'logo-arsystem', logoSrc: 'img/arsystem.jpg',
 name: 'Arsystem', by: '', isPlaceholder: false,
-descHtml: html('<p style="margin:0">Descrição do case em breve.</p>'),
+descHtml: null,
 },
 {
 photos: photosForFiles('avell', 'Avell', 6), logoSlotId: 'logo-avell', logoSrc: 'img/avell.png',
 name: 'Avell', by: '', isPlaceholder: false,
-descHtml: html('<p style="margin:0">Descrição do case em breve.</p>'),
+descHtml: null,
 },
 {
 photos: photosForFiles('biosaude', 'BioSaúde', 5), logoSlotId: 'logo-biosaude', logoSrc: 'img/biosaude.webp',
 name: 'BioSaúde', by: '', isPlaceholder: false,
-descHtml: html('<p style="margin:0">Descrição do case em breve.</p>'),
+descHtml: null,
 },
 {
 photos: photosForFiles('bnengenharia', 'BN Engenharia', 8), logoSlotId: 'logo-bnengenharia', logoSrc: 'img/' + encodeURIComponent('bn engenharia.png'),
 name: 'BN Engenharia', by: '', isPlaceholder: false,
-descHtml: html('<p style="margin:0">Descrição do case em breve.</p>'),
+descHtml: null,
 },
 {
 photos: photosForFiles('softcom', 'Softcom', 7), logoSlotId: 'logo-softcom', logoSrc: 'img/softcom.jpg',
 name: 'Softcom', by: '', isPlaceholder: false,
-descHtml: html('<p style="margin:0">Case regional da franquia Marelli João Pessoa. Descrição em breve.</p>'),
+descHtml: null,
 },
 ].map((c) => ({
 ...c,
