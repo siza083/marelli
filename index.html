@@ -497,8 +497,8 @@ const categoryImageFiles = {
 'Divisórias': 'divisorias.png',
 'Cabines Acústicas': 'cabines acusticas.webp',
 'Acessórios': 'acessorios.webp',
-'Soluções Acústicas': 'solucoes-acusticas.webp',
-'Outsourcing de impressão': 'outsourcing-impressao.webp',
+'Soluções Acústicas': 'solução acústica.webp',
+'Outsourcing de impressão': 'outsourcing de impressão.webp',
 };
 const imgSrcFor = function (name) {
 const file = categoryImageFiles[name];
@@ -519,7 +519,7 @@ waLink: waLink('Olá, vim do site e tenho interesse na categoria ' + name + '.')
 const consultServices = ['Soluções Acústicas', 'Outsourcing de impressão'];
 consultServices.forEach(function (name, i) {
 categories.push({
-name: name, slotId: 'consult-' + i, imgPlaceholder: 'Foto: ' + name, imgSrc: imgSrcFor(name), isConsult: name !== 'Soluções Acústicas',
+name: name, slotId: 'consult-' + i, imgPlaceholder: 'Foto: ' + name, imgSrc: imgSrcFor(name), isConsult: true,
 waLink: waLink('Olá, vim do site e tenho interesse no serviço ' + name + '.'),
 });
 });
