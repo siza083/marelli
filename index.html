@@ -244,17 +244,13 @@ image-slot#cat-2::part(frame), image-slot#cat-4::part(frame) { background: #FFFF
 <p style="font-size:15px;line-height:1.6;color:#5A5A5A;max-width:640px;margin:0 0 36px">Prontas para uso em projeto.</p>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;max-width:920px">
 <sc-for list="{{ libraries }}" as="lib" hint-placeholder-count="3">
-<div style="background:#FFFFFF;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 24px rgba(0,0,0,0.05)">
-<div style="width:100%;height:128px;background:#F3F3F3;display:flex;align-items:center;justify-content:center;padding:22px;box-sizing:border-box">
-<sc-if value="{{ lib.logoSrc }}" hint-placeholder-val="{{ false }}">
-<image-slot id="{{ lib.logoSlotId }}" shape="rect" fit="contain" style="width:100%;height:100%" placeholder="Logo" src="{{ lib.logoSrc }}"></image-slot>
-</sc-if>
+<div class="lib-card" style="background:#EDEDED;border-radius:12px;display:flex;flex-direction:column;align-items:center;text-align:center;padding:36px 28px 32px;box-sizing:border-box">
+<div style="height:84px;display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+<img src="{{ lib.logoSrc }}" alt="{{ lib.title }}" style="{{ lib.logoStyle }}">
 </div>
-<div style="padding:26px;display:flex;flex-direction:column;gap:16px;flex:1">
-<div style="font-size:17px;font-weight:700;color:#3A3A3A">{{ lib.title }}</div>
-<div style="font-size:13.5px;color:#8C8C8C;flex:1">{{ lib.desc }}</div>
-<button onClick="{{ lib.open }}" style="border:none;color:#FFFFFF;background:#C41230;padding:12px 16px;border-radius:999px;font-weight:600;font-size:13px;cursor:pointer">{{ lib.ctaLabel }}</button>
-</div>
+<div style="font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#4A4A4A;margin-bottom:12px">{{ lib.title }}</div>
+<div style="font-size:14px;line-height:1.6;color:#6A6A6A;flex:1;margin-bottom:26px;max-width:280px">{{ lib.desc }}</div>
+<button onClick="{{ lib.open }}" style="border:none;color:#FFFFFF;background:#C41230;padding:14px 26px;border-radius:8px;font-family:inherit;font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer">{{ lib.ctaLabel }}</button>
 </div>
 </sc-for>
 </div>
@@ -497,8 +493,8 @@ const categoryImageFiles = {
 'Divisórias': 'divisorias.png',
 'Cabines Acústicas': 'cabines acusticas.webp',
 'Acessórios': 'acessorios.webp',
-'Soluções Acústicas': 'solução acústica.webp',
-'Outsourcing de impressão': 'outsourcing de impressão.webp',
+'Soluções Acústicas': 'solucoes-acusticas.webp',
+'Outsourcing de impressão': 'outsourcing-impressao.webp',
 };
 const imgSrcFor = function (name) {
 const file = categoryImageFiles[name];
@@ -519,7 +515,7 @@ waLink: waLink('Olá, vim do site e tenho interesse na categoria ' + name + '.')
 const consultServices = ['Soluções Acústicas', 'Outsourcing de impressão'];
 consultServices.forEach(function (name, i) {
 categories.push({
-name: name, slotId: 'consult-' + i, imgPlaceholder: 'Foto: ' + name, imgSrc: imgSrcFor(name), isConsult: true,
+name: name, slotId: 'consult-' + i, imgPlaceholder: 'Foto: ' + name, imgSrc: imgSrcFor(name), isConsult: name !== 'Soluções Acústicas',
 waLink: waLink('Olá, vim do site e tenho interesse no serviço ' + name + '.'),
 });
 });
@@ -533,9 +529,9 @@ const faqData = [
 const faqs = faqData.map((f, i) => ({ ...f, open: !!this.state.faqOpen[i], symbol: this.state.faqOpen[i] ? '−' : '+', toggle: this.toggleFaq(i) }));
 
 const libraries = [
-{ title: 'Biblioteca 2D', desc: 'Modelos em 2D prontos para uso em projeto.', ctaLabel: 'Baixar agora', open: this.openModal('2d'), logoSlotId: 'lib-logo-2d', logoSrc: null },
-{ title: '3D Warehouse', desc: 'Coleções Marelli na plataforma 3D Warehouse.', ctaLabel: 'Acessar agora', open: this.openModal('3d'), logoSlotId: 'lib-logo-3d', logoSrc: 'img/3d-warehouse.png' },
-{ title: 'Revit B.I.M.', desc: 'Famílias Revit prontas para especificação.', ctaLabel: 'Baixar agora', open: this.openModal('revit'), logoSlotId: 'lib-logo-revit', logoSrc: 'img/revit-autodesk.png' },
+{ title: 'Biblioteca 2D', desc: 'Modelos em 2D prontos para uso em projeto.', ctaLabel: 'Baixar agora', open: this.openModal('2d'), logoStyle: 'height:84px;width:auto;display:block', logoSlotId: 'lib-logo-2d', logoSrc: 'data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20120%2084%22%3E%3Cpath%20fill=%22%23C41230%22%20d=%22M96%2034.5C93.6%2018.9%2080.2%207%2064%207c-12%200-22.4%206.6-27.8%2016.3C34.8%2023.1%2033.4%2023%2032%2023%2017.6%2023%206%2034.6%206%2049s11.6%2026%2026%2026h62c11%200%2020-9%2020-20%200-10.100-7.500-18.500-18-20.500z%22/%3E%3Cpath%20fill=%22%23FFFFFF%22%20d=%22M55%2028h10v21h10.500L60%2064%2044.500%2049H55z%22/%3E%3C/svg%3E' },
+{ title: '3D Warehouse', desc: 'Coleções Marelli na plataforma 3D Warehouse.', ctaLabel: 'Acessar agora', open: this.openModal('3d'), logoStyle: 'width:176px;max-width:100%;height:auto;display:block', logoSlotId: 'lib-logo-3d', logoSrc: 'img/3d-warehouse-logo.png' },
+{ title: 'Revit B.I.M.', desc: 'Famílias Revit prontas para especificação.', ctaLabel: 'Baixar agora', open: this.openModal('revit'), logoStyle: 'height:84px;width:auto;display:block', logoSlotId: 'lib-logo-revit', logoSrc: 'img/revit-bim.png' },
 ];
 
 const modalTitles = { '2d': 'Baixar agora', '3d': 'Acessar agora', 'revit': 'Baixar agora' };
