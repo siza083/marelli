@@ -181,7 +181,7 @@ image-slot#cat-2::part(frame), image-slot#cat-4::part(frame) { background: #FFFF
 <div style="background:#FAFAFA;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
 <div style="display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px">
 <sc-for list="{{ c.photos }}" as="ph" hint-placeholder-count="3">
-<image-slot id="{{ ph.slotId }}" onClick="{{ ph.open }}" shape="rounded" radius="14" placeholder="{{ ph.placeholder }}" src="{{ ph.src }}" style="flex:0 0 78%;scroll-snap-align:start;height:160px;cursor:pointer"></image-slot>
+<image-slot id="{{ ph.slotId }}" onClick="{{ ph.open }}" shape="rounded" radius="14" placeholder="{{ ph.placeholder }}" src="{{ ph.thumb }}" style="flex:0 0 78%;scroll-snap-align:start;height:160px;cursor:pointer"></image-slot>
 </sc-for>
 </div>
 <sc-if value="{{ c.descHtml }}" hint-placeholder-val="{{ false }}">
@@ -510,7 +510,8 @@ const html = (s) => ({ __html: s });
 const photosFor = (key, label) => [1, 2, 3].map((n) => ({ slotId: key + '-ph-' + n, placeholder: 'Foto ' + n + ': ' + label }));
 const photosForFiles = (key, label, count) => Array.from({ length: count }, (_, i) => {
 const n = i + 1;
-return { slotId: key + '-ph-' + n, placeholder: 'Foto ' + n + ': ' + label, src: 'img/cases/' + key + '-' + n + '.jpg' };
+// thumb (600px) aparece na galeria; src (foto cheia) só carrega quando abre o lightbox.
+return { slotId: key + '-ph-' + n, placeholder: 'Foto ' + n + ': ' + label, src: 'img/cases/' + key + '-' + n + '.jpg', thumb: 'img/cases/thumb/' + key + '-' + n + '.jpg' };
 });
 const cases = [
 {
@@ -568,7 +569,7 @@ const categoryImageFiles = {
 'Assentos': 'assentos.webp',
 'Mobiliários': 'mobiliario.png',
 'Estofados': 'estofados.png',
-'Divisórias': 'divisorias.png',
+'Divisórias': 'divisorias.webp',
 'Cabines Acústicas': 'cabines acusticas.webp',
 'Acessórios': 'acessorios.webp',
 'Soluções Acústicas': 'solucoes-acusticas.webp',
