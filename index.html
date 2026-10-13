@@ -4,6 +4,13 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WCNL2Z5R');</script>
+<!-- End Google Tag Manager -->
 <!-- Título, descrição e cartão de compartilhamento ficam aqui, fora do template: Google e WhatsApp leem a página sem rodar o script. -->
 <title>Móveis para Escritório em João Pessoa | Marelli JP</title>
 <meta name="description" content="Franquia oficial Marelli em João Pessoa. Cadeiras, estações de trabalho, divisórias e cabines acústicas para empresas e órgãos públicos.">
@@ -26,6 +33,10 @@
 <script src="./support.js"></script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCNL2Z5R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -491,6 +502,8 @@ const { formName, formEmail, formPhone, formAccepted, modalType } = this.state;
 if (!formName || !formEmail || !this.phoneOk(formPhone) || !formAccepted) return;
 this.setState({ formSubmitted: true });
 this.sendLead();
+// Avisa o GTM que um lead foi enviado. Só o nome da biblioteca, nenhum dado pessoal.
+(window.dataLayer = window.dataLayer || []).push({ event: 'lead_enviado', biblioteca: modalType });
 if (modalType === '3d') window.open(this.warehouseUrl, '_blank');
 };
 
@@ -530,7 +543,7 @@ name: 'BioSaúde', by: '', isPlaceholder: false,
 descHtml: null,
 },
 {
-photos: photosForFiles('bnengenharia', 'BN Engenharia', 8), logoSlotId: 'logo-bnengenharia', logoSrc: 'img/' + encodeURIComponent('bn engenharia.png'),
+photos: photosForFiles('bnengenharia', 'BN Engenharia', 8), logoSlotId: 'logo-bnengenharia', logoSrc: 'img/bn-engenharia.png',
 name: 'BN Engenharia', by: '', isPlaceholder: false,
 descHtml: null,
 },
@@ -570,7 +583,7 @@ const categoryImageFiles = {
 'Mobiliários': 'mobiliario.png',
 'Estofados': 'estofados.png',
 'Divisórias': 'divisorias.webp',
-'Cabines Acústicas': 'cabines acusticas.webp',
+'Cabines Acústicas': 'cabines-acusticas.webp',
 'Acessórios': 'acessorios.webp',
 'Soluções Acústicas': 'solucoes-acusticas.webp',
 'Outsourcing de impressão': 'outsourcing-impressao.webp',
