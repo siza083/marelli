@@ -328,7 +328,7 @@ image-slot#cat-2::part(frame), image-slot#cat-4::part(frame) { background: #FFFF
 <div style="font-size:13.5px;color:#8C8C8C">{{ modalIntro }}</div>
 <input placeholder="Nome" value="{{ formName }}" onChange="{{ onFormName }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
 <input placeholder="E-mail" value="{{ formEmail }}" onChange="{{ onFormEmail }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
-<input placeholder="WhatsApp" value="{{ formPhone }}" onChange="{{ onFormPhone }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
+<input type="tel" inputmode="numeric" autocomplete="tel" placeholder="WhatsApp com DDD" value="{{ formPhone }}" onChange="{{ onFormPhone }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
 <input placeholder="Escritório ou empresa (opcional)" value="{{ formCompany }}" onChange="{{ onFormCompany }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
 <label style="display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:#3A3A3A;line-height:1.5">
 <input type="checkbox" checked="{{ formAccepted }}" onChange="{{ onFormToggleAccept }}" style="margin-top:2px">
@@ -412,8 +412,20 @@ lightboxNextClick = (e) => { e.stopPropagation(); this.lightboxNext(); };
 
 onFormChange(field) {
 var key = 'form' + field.charAt(0).toUpperCase() + field.slice(1);
-return (e) => this.setState({ [key]: e.target.value });
+return (e) => this.setState({ [key]: field === 'phone' ? this.maskPhone(e.target.value) : e.target.value });
 }
+// (83) 99375-6132 para celular, (83) 3222-1234 para fixo. Também faz a planilha receber texto, não número.
+maskPhone(value) {
+let d = String(value).replace(/\D/g, '');
+// Número colado com +55 na frente: tira o código do país.
+if (d.length > 11 && d.startsWith('55')) d = d.slice(2);
+d = d.slice(0, 11);
+if (d.length <= 2) return d.length ? '(' + d : '';
+const rest = d.slice(2);
+const cut = d.length > 10 ? 5 : 4;
+return '(' + d.slice(0, 2) + ') ' + (rest.length > cut ? rest.slice(0, cut) + '-' + rest.slice(cut) : rest);
+}
+phoneOk(value) { return String(value).replace(/\D/g, '').length >= 10; }
 onFormToggleAccept = () => this.setState(s => ({ formAccepted: !s.formAccepted }));
 
 // Arquivos oficiais hospedados pela Marelli nacional (marelli.com.br/biblioteca). Se um link quebrar, conferir lá.
@@ -457,7 +469,7 @@ fetch(this.leadsEndpoint, { method: 'POST', mode: 'no-cors', keepalive: true, bo
 
 submitForm = () => {
 const { formName, formEmail, formPhone, formAccepted, modalType } = this.state;
-if (!formName || !formEmail || !formPhone || !formAccepted) return;
+if (!formName || !formEmail || !this.phoneOk(formPhone) || !formAccepted) return;
 this.setState({ formSubmitted: true });
 this.sendLead();
 if (modalType === '3d') window.open(this.warehouseUrl, '_blank');
@@ -593,7 +605,7 @@ const modalSuccessMsg = modalIs3d
 const modalLib = this.libraryFiles[this.state.modalType];
 const modalFiles = modalLib ? modalLib.items.map(([name, file, size]) => ({ name, size: 'ZIP, ' + size, href: modalLib.base + file + '.zip' })) : [];
 
-const canSubmit = this.state.formName && this.state.formEmail && this.state.formPhone && this.state.formAccepted;
+const canSubmit = this.state.formName && this.state.formEmail && this.phoneOk(this.state.formPhone) && this.state.formAccepted;
 
 const lightboxPhoto = this.state.lightboxPhotos[this.state.lightboxIndex] || null;
 const lightboxSrc = lightboxPhoto ? lightboxPhoto.src : '';
