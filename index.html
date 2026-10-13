@@ -124,8 +124,8 @@ image-slot#cat-2::part(frame), image-slot#cat-4::part(frame) { background: #FFFF
 <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:32px">
 <h2 style="font-size:clamp(24px,3vw,34px);font-weight:700;color:#3A3A3A;margin:0;text-wrap:pretty">Navegue por nossas soluções</h2>
 <div style="display:flex;gap:10px">
-<button onClick="{{ scrollCatalog(-1) }}" aria-label="Anterior" style="width:44px;height:44px;border-radius:50%;border:1px solid #E5E5E5;background:#FAFAFA;color:#3A3A3A;cursor:pointer;font-size:16px">←</button>
-<button onClick="{{ scrollCatalog(1) }}" aria-label="Próximo" style="width:44px;height:44px;border-radius:50%;border:1px solid #E5E5E5;background:#FAFAFA;color:#3A3A3A;cursor:pointer;font-size:16px">→</button>
+<button onClick="{{ scrollCatalogPrev }}" aria-label="Anterior" style="width:44px;height:44px;border-radius:50%;border:1px solid #E5E5E5;background:#FAFAFA;color:#3A3A3A;cursor:pointer;font-size:16px">←</button>
+<button onClick="{{ scrollCatalogNext }}" aria-label="Próximo" style="width:44px;height:44px;border-radius:50%;border:1px solid #E5E5E5;background:#FAFAFA;color:#3A3A3A;cursor:pointer;font-size:16px">→</button>
 </div>
 </div>
 </div>
@@ -302,6 +302,22 @@ image-slot#cat-2::part(frame), image-slot#cat-4::part(frame) { background: #FFFF
 <sc-if value="{{ formSubmitted }}" hint-placeholder-val="{{ false }}">
 <div style="font-size:19px;font-weight:700;color:#3A3A3A">Tudo certo!</div>
 <div style="font-size:14.5px;color:#3A3A3A;line-height:1.6">{{ modalSuccessMsg }}</div>
+<sc-if value="{{ modalHasFiles }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ modalFiles }}" as="f" hint-placeholder-count="6">
+<a href="{{ f.href }}" download style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #E5E5E5;border-radius:12px;padding:10px 10px 10px 14px;color:#3A3A3A">
+<span style="display:flex;flex-direction:column;gap:2px">
+<span style="font-size:14px;font-weight:600">{{ f.name }}</span>
+<span style="font-size:12px;color:#8C8C8C">{{ f.size }}</span>
+</span>
+<span aria-hidden="true" style="flex:none;width:38px;height:38px;border-radius:10px;background:#C41230;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600">↓</span>
+</a>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ modalIs3d }}" hint-placeholder-val="{{ false }}">
+<a href="{{ warehouseUrl }}" target="_blank" rel="noopener" style="font-size:13.5px;font-weight:600">Não abriu? Acessar o 3D Warehouse</a>
+</sc-if>
 <button onClick="{{ closeModal }}" style="margin-top:8px;background:#C41230;color:#FFFFFF;border:none;padding:13px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer">Fechar</button>
 </sc-if>
 <sc-if value="{{ formNotSubmitted }}" hint-placeholder-val="{{ true }}">
@@ -309,11 +325,11 @@ image-slot#cat-2::part(frame), image-slot#cat-4::part(frame) { background: #FFFF
 <div style="font-size:19px;font-weight:700;color:#3A3A3A;line-height:1.3">Baixe os arquivos técnicos da Marelli</div>
 <button onClick="{{ closeModal }}" aria-label="Fechar" style="background:none;border:none;font-size:20px;color:#8C8C8C;cursor:pointer;line-height:1">×</button>
 </div>
-<div style="font-size:13.5px;color:#8C8C8C">Preencha seus dados e a ação começa automaticamente.</div>
-<input placeholder="Nome" value="{{ formName }}" onChange="{{ onFormChange('name') }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
-<input placeholder="E-mail" value="{{ formEmail }}" onChange="{{ onFormChange('email') }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
-<input placeholder="WhatsApp" value="{{ formPhone }}" onChange="{{ onFormChange('phone') }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
-<input placeholder="Escritório ou empresa (opcional)" value="{{ formCompany }}" onChange="{{ onFormChange('company') }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
+<div style="font-size:13.5px;color:#8C8C8C">{{ modalIntro }}</div>
+<input placeholder="Nome" value="{{ formName }}" onChange="{{ onFormName }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
+<input placeholder="E-mail" value="{{ formEmail }}" onChange="{{ onFormEmail }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
+<input placeholder="WhatsApp" value="{{ formPhone }}" onChange="{{ onFormPhone }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
+<input placeholder="Escritório ou empresa (opcional)" value="{{ formCompany }}" onChange="{{ onFormCompany }}" style="border:1px solid #E5E5E5;border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit">
 <label style="display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:#3A3A3A;line-height:1.5">
 <input type="checkbox" checked="{{ formAccepted }}" onChange="{{ onFormToggleAccept }}" style="margin-top:2px">
 Li e aceito a política de privacidade.
@@ -400,20 +416,51 @@ return (e) => this.setState({ [key]: e.target.value });
 }
 onFormToggleAccept = () => this.setState(s => ({ formAccepted: !s.formAccepted }));
 
+// Arquivos oficiais hospedados pela Marelli nacional (marelli.com.br/biblioteca). Se um link quebrar, conferir lá.
+warehouseUrl = 'https://3dwarehouse.sketchup.com/by/MarelliOficial';
+libraryFiles = {
+'revit': { base: 'https://blog.marelli.com.br/biblioteca/revit/', items: [
+['Assento PT 01', 'ASSENTO_PT_01', '703 MB'], ['Assento PT 02', 'ASSENTO_PT_02', '461 MB'],
+['Assento PT 03', 'ASSENTO_PT_03', '346 MB'], ['Assento PT 04', 'ASSENTO_PT_04', '503 MB'],
+['Cabines Acústicas', 'CABINES_ACUSTICAS', '61 MB'], ['Divisórias', 'DIVISORIAS', '202 MB'],
+['Estofados', 'ESTOFADOS', '254 MB'], ['Mobiliário PT 01', 'MOBILIARIO_PT_01', '402 MB'],
+['Mobiliário PT 02', 'MOBILIARIO_PT_02', '547 MB'],
+] },
+'2d': { base: 'https://blog.marelli.com.br/biblioteca/2d/', items: [
+['Assentos', 'ASSENTOS', '38 MB'], ['Cabines Acústicas', 'CABINES_ACUSTICAS', '4 MB'],
+['Divisória Piso Teto', 'DIVISORIA_PISO_TETO', '237 MB'], ['Estofados', 'ESTOFADOS', '12 MB'],
+['Mobiliários', 'MOBILIARIOS', '572 MB'], ['Painéis Divisórias', 'PAINEIS_DIVISORIAS', '12 MB'],
+] },
+};
+
+// Formulário Google que recebe os leads: grava na planilha vinculada e dispara o e-mail de aviso.
+leadsEndpoint = 'https://docs.google.com/forms/d/e/1FAIpQLSf-xxTRAb5bNW6RJh5ZcqEGMfMmVc_utg_qAete_4fwe6GNug/formResponse';
+leadsFields = { nome: 'entry.412549268', email: 'entry.1171926493', telefone: 'entry.1057177363', empresa: 'entry.1068472251', origem: 'entry.2073822091', pagina: 'entry.1500776815' };
+
+sendLead() {
+if (!this.leadsEndpoint) return;
+const { formName, formEmail, formPhone, formCompany, modalType } = this.state;
+const origem = { '2d': 'Biblioteca 2D', '3d': '3D Warehouse', 'revit': 'Revit B.I.M.' }[modalType] || modalType;
+const f = this.leadsFields;
+const body = new URLSearchParams();
+body.append(f.nome, formName);
+body.append(f.email, formEmail);
+body.append(f.telefone, formPhone);
+body.append(f.empresa, formCompany || '');
+body.append(f.origem, origem);
+body.append(f.pagina, location.origin + location.pathname);
+// no-cors: o Google Forms não devolve cabeçalhos de CORS, então o envio é "cego" (sem ler a resposta).
+try {
+fetch(this.leadsEndpoint, { method: 'POST', mode: 'no-cors', keepalive: true, body: body }).catch(() => {});
+} catch (e) {}
+}
+
 submitForm = () => {
 const { formName, formEmail, formPhone, formAccepted, modalType } = this.state;
 if (!formName || !formEmail || !formPhone || !formAccepted) return;
 this.setState({ formSubmitted: true });
-if (modalType === '3d') {
-window.open('https://3dwarehouse.sketchup.com/', '_blank');
-} else {
-const fileName = modalType === 'revit' ? 'marelli-revit-bim-placeholder.txt' : 'marelli-biblioteca-2d-placeholder.txt';
-const blob = new Blob(['Arquivo técnico Marelli — placeholder de demonstração.'], { type: 'text/plain' });
-const url = URL.createObjectURL(blob);
-const a = document.createElement('a');
-a.href = url; a.download = fileName; document.body.appendChild(a); a.click();
-a.remove(); URL.revokeObjectURL(url);
-}
+this.sendLead();
+if (modalType === '3d') window.open(this.warehouseUrl, '_blank');
 };
 
 renderVals() {
@@ -534,11 +581,17 @@ const libraries = [
 { title: 'Revit B.I.M.', desc: 'Famílias Revit prontas para especificação.', ctaLabel: 'Baixar agora', open: this.openModal('revit'), logoStyle: 'height:84px;width:auto;display:block', logoSlotId: 'lib-logo-revit', logoSrc: 'img/revit-bim.png' },
 ];
 
-const modalTitles = { '2d': 'Baixar agora', '3d': 'Acessar agora', 'revit': 'Baixar agora' };
+const modalIs3d = this.state.modalType === '3d';
+const modalTitles = { '2d': 'Ver arquivos', '3d': 'Acessar agora', 'revit': 'Ver arquivos' };
 const modalCtaLabel = modalTitles[this.state.modalType] || 'Enviar';
-const modalSuccessMsg = this.state.modalType === '3d'
+const modalIntro = modalIs3d
+? 'Preencha seus dados e abrimos o 3D Warehouse em seguida.'
+: 'Preencha seus dados para liberar os arquivos.';
+const modalSuccessMsg = modalIs3d
 ? 'Abrimos o 3D Warehouse em uma nova aba.'
-: 'O download do arquivo começou automaticamente.';
+: 'Escolha o que quer baixar. Os arquivos são grandes, então o download pode demorar um pouco.';
+const modalLib = this.libraryFiles[this.state.modalType];
+const modalFiles = modalLib ? modalLib.items.map(([name, file, size]) => ({ name, size: 'ZIP, ' + size, href: modalLib.base + file + '.zip' })) : [];
 
 const canSubmit = this.state.formName && this.state.formEmail && this.state.formPhone && this.state.formAccepted;
 
@@ -554,13 +607,14 @@ toggleMobileMenu: this.toggleMobileMenu, closeMobileMenu: this.closeMobileMenu,
 ctaWaLink,
 diferenciais, cases, categories, faqs, libraries, ytShorts,
 catalogRef: (el) => { this.state.catalogRef = el; },
-scrollCatalog: (dir) => this.scrollCatalog(dir),
+// O template só resolve nomes e caminhos, não chamadas com argumento. Por isso cada handler vai pronto.
+scrollCatalogPrev: this.scrollCatalog(-1), scrollCatalogNext: this.scrollCatalog(1),
 modalOpen: this.state.modalOpen,
 formSubmitted: this.state.formSubmitted, formNotSubmitted: !this.state.formSubmitted,
-modalCtaLabel, modalSuccessMsg,
+modalCtaLabel, modalSuccessMsg, modalIntro, modalIs3d, modalFiles, modalHasFiles: modalFiles.length > 0, warehouseUrl: this.warehouseUrl,
 closeModal: this.closeModal, stopPropagation: this.stopPropagation,
 formName: this.state.formName, formEmail: this.state.formEmail, formPhone: this.state.formPhone, formCompany: this.state.formCompany,
-onFormChange: (f) => this.onFormChange(f),
+onFormName: this.onFormChange('name'), onFormEmail: this.onFormChange('email'), onFormPhone: this.onFormChange('phone'), onFormCompany: this.onFormChange('company'),
 formAccepted: this.state.formAccepted, onFormToggleAccept: this.onFormToggleAccept,
 submitForm: this.submitForm,
 submitDisabled: !canSubmit,
