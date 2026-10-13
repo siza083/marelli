@@ -519,7 +519,7 @@ waLink: waLink('Olá, vim do site e tenho interesse na categoria ' + name + '.')
 const consultServices = ['Soluções Acústicas', 'Outsourcing de impressão'];
 consultServices.forEach(function (name, i) {
 categories.push({
-name: name, slotId: 'consult-' + i, imgPlaceholder: 'Foto: ' + name, imgSrc: imgSrcFor(name), isConsult: true,
+name: name, slotId: 'consult-' + i, imgPlaceholder: 'Foto: ' + name, imgSrc: imgSrcFor(name), isConsult: name !== 'Soluções Acústicas',
 waLink: waLink('Olá, vim do site e tenho interesse no serviço ' + name + '.'),
 });
 });
