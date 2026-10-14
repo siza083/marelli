@@ -617,7 +617,6 @@ waLink: waLink('Olá, vim do site e tenho interesse no serviço ' + name + '.'),
 const faqData = [
 { q: 'Vocês atendem processos de licitação pública?', a: 'Sim, temos experiência ampla com órgãos públicos e participação em licitações com total transparência documental.' },
 { q: 'É possível comprar apenas alguns itens, sem fechar um projeto completo?', a: 'Sim, os catálogos estão disponíveis para compra avulsa, mas também estruturamos projetos completos quando o ambiente pede uma solução integrada.' },
-{ q: 'Qual o prazo médio de entrega para um projeto corporativo?', a: 'Prazo a definir com o cliente.', isPending: true },
 { q: 'Vocês atendem fora de João Pessoa?', a: 'Nosso atendimento direto cobre João Pessoa, Cabedelo e Santa Rita. Somos a franquia oficial Marelli nessa região, com acesso ao portfólio completo e ao suporte técnico da marca nacional.' },
 ];
 const faqs = faqData.map((f, i) => ({ ...f, open: !!this.state.faqOpen[i], symbol: this.state.faqOpen[i] ? '−' : '+', toggle: this.toggleFaq(i) }));
